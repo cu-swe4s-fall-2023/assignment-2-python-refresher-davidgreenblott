@@ -2,3 +2,10 @@
 # python-refresher
 
 ## my_utils.py
+get_column method finds values pertaining to certain query_column
+
+## print_fires.py
+prints out the total number of fires in the USA from 1990-2020
+
+## run.sh
+runs print_fires.py
