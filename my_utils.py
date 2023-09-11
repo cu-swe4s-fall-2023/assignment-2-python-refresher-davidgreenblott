@@ -1,6 +1,6 @@
 
 #takes in a file name and returns values in a column that match a query_value
-def get_column(file_name, query_column, query_value, result_column):
+def get_column(file_name, query_column, query_value, result_column = 1):
     
     matchingValues = []
     
