@@ -29,7 +29,7 @@ def get_column(file_name, query_column, query_value, result_column=1):
 
                 if items[query_column] == str(query_value):
 
-                    matchingValues.append(items[result_column])
+                    matchingValues.append(int(float(items[result_column])))
     except FileNotFoundError:
         print('Could not find ' + file_name)
         sys.exit(1)

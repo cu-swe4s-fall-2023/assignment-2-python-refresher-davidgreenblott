@@ -45,7 +45,7 @@ def main():
     totalFires = 0
 
     for fire in fires:
-        totalFires += float(fire)
+        totalFires += fire
     print(f'Total Fires in {args.country} between 1990 and 2020: {totalFires}')
 
 
