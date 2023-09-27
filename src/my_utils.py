@@ -21,7 +21,7 @@ def get_column(file_name, query_column, query_value, result_column=1):
     matchingValues = []
 
     try:
-        with open(file_name, 'r') as f:
+        with open('../data/'+file_name, 'r') as f:
 
             for line in f:
 
