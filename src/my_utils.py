@@ -36,5 +36,8 @@ def get_column(file_name, query_column, query_value, result_column=1):
     except PermissionError:
         print('Could not open ' + file_name)
         sys.exit(1)
+    except ValueError:
+        print('Error in converting query column to an integer')
+        sys.exit(1)
 
     return matchingValues
