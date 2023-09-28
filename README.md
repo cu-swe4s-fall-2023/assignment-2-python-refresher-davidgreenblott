@@ -6,6 +6,9 @@ Accepts user argument for a country and outputs the total number of fires betwee
 - requires a csv file to be in the "data" folder that is on the same level as the "src" folder
 
 # How to Use
+1. put data in another folder on same level called "data"
+2. `git clone https://github.com/cu-swe4s-fall-2023/assignment-2-python-refresher-davidgreenblott.git`
+3. Query searching
 - specify the query locations for the country and fire columns
 - specify country of interest and file name
 - pass arguments upon running print_fires.py
