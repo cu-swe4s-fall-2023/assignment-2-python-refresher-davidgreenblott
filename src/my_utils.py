@@ -4,7 +4,7 @@ in a column that match a query_value'''
 import sys
 
 
-def get_column(file_name, query_column, query_value, result_column=1):
+def get_column(file_name = '', query_column = 0, query_value = '', result_column=3):
     '''Returns a list of values from the query inputs
     Parameters
     ----------
@@ -14,7 +14,7 @@ def get_column(file_name, query_column, query_value, result_column=1):
     query_column: int
                   column to perform query on
     query_value: int
-                 which country to perform wserach on
+                 which country to perform search on
     resut_column: int
                   the column that has value of interest
     '''
@@ -41,3 +41,13 @@ def get_column(file_name, query_column, query_value, result_column=1):
         sys.exit(1)
 
     return matchingValues
+
+def get_mean(array = []):
+    '''Returns the mean of a list of values from the list of values
+    Parameters
+    ----------
+    array: list
+           list of integers on which to compute mean
+    '''
+    
+    return sum(array)/len(array)
