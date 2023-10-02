@@ -51,3 +51,21 @@ def get_mean(array = []):
     '''
     
     return sum(array)/len(array)
+
+def get_median(array = []):
+    '''Returns the median of a list of values from the list of values
+    Parameters
+    ----------
+    array: list
+           list of integers on which to compute median
+    '''
+    sorted_array = sorted(array)
+    length = len(sorted_list)
+    
+    if length % 2 == 1:
+        return sorted_list[length // 2]
+    
+    else:
+        middle1 = sorted_list[(length // 2) - 1]
+        middle2 = sorted_list[length // 2]
+        return (middle1 + middle2) / 2
