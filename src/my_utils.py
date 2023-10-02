@@ -69,3 +69,20 @@ def get_median(array = []):
         middle1 = sorted_list[(length // 2) - 1]
         middle2 = sorted_list[length // 2]
         return (middle1 + middle2) / 2
+
+def get_standard_deviation(array = []):
+    '''Returns the standard deviation of a list of values from the list of values
+    Parameters
+    ----------
+    array: list
+           list of integers on which to compute standard deviation
+    '''
+    
+    mean = get_mean(array)
+    n = len(array)
+    sum_squared_diff = sum((x - mean) ** 2 for x in int_list)
+    variance = sum_squared_diff / (n - 1)
+    std_deviation = variance ** 0.5
+
+    return std_deviation
+    
