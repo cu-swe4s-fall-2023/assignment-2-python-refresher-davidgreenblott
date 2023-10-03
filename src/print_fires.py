@@ -4,6 +4,7 @@
 
 from my_utils import get_column
 import argparse
+import os
 
 
 def get_user_args():
@@ -40,7 +41,7 @@ def get_user_args():
 def main():
 
     args = get_user_args()
-    fires = get_column(args.file_name, args.country_column,
+    fires = get_column('../data/'+args.file_name, args.country_column,
                        args.country, result_column=args.fires_column)
     totalFires = 0
 
