@@ -11,4 +11,5 @@ country_column=0
 fires_column=3
 file_name='Agrofood_co2_emission.csv'
 python print_fires.py --country "$country" --country_column $country_column \
-                      --fires_column $fires_column --file_name $file_name
+                      --fires_column $fires_column --file_name $file_name \
+                      --operation 'mean'

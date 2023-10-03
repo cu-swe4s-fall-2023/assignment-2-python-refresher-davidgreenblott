@@ -2,7 +2,7 @@
     * get_user_args() - accepts user input from command line
     * main() - calls get_column() to find query result'''
 
-from my_utils import get_column
+import my_utils
 import argparse
 import os
 
@@ -34,6 +34,10 @@ def get_user_args():
                         type=str,
                         help='The file name',
                         required=True)
+    parser.add_argument('--operation',
+                        type=str,
+                        help='Operation to perform',
+                        required=False)
 
     return parser.parse_args()
 
@@ -41,13 +45,26 @@ def get_user_args():
 def main():
 
     args = get_user_args()
-    fires = get_column('../data/'+args.file_name, args.country_column,
-                       args.country, result_column=args.fires_column)
-    totalFires = 0
+    fires = my_utils.get_column('../data/'+args.file_name, args.country_column,
+                                args.country, result_column=args.fires_column)
 
-    for fire in fires:
-        totalFires += fire
-    print(f'Total Fires in {args.country} between 1990 and 2020: {totalFires}')
+    if args.operation == 'mean':
+
+        print(f'Mean Fires in {args.country} is: '
+              f'{my_utils.get_mean(fires):.3f}')
+
+    elif args.operation == 'median':
+
+        print(f'Median Fires in {args.country} is: '
+              f'{my_utils.get_median(fires):.3f}')
+    elif args.operation == 'standard deviation':
+
+        print(f'Standard deviation of fires in {args.country} is: '
+              f'{my_utils.get_standard_deviation(fires):.3f}')
+    else:
+
+        print(f'Total Fires in {args.country} between 1990 and 2020: '
+              f'{sum(fires)}')
 
 
 if __name__ == "__main__":
