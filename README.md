@@ -9,6 +9,13 @@ Accepts user argument for a country and outputs the total number of fires betwee
 1. put data in another folder on same level called "data"
 2. `git clone https://github.com/cu-swe4s-fall-2023/assignment-2-python-refresher-davidgreenblott.git`
 3. Query searching
-- specify the query locations for the country and fire columns
-- specify country of interest and file name
-- pass arguments upon running print_fires.py
+a. specify the query locations for the country and fire columns
+b. specify country of interest and file name
+c. pass arguments upon running `print_fires.py`
+4. Can also specify operation to perform on the list of integers that is returned 
+a. options include setting the operation parameter to `mean`, `median`, or `standard deviation`
+
+# Unit and Functional Testing
+- Ensure you are running unit tests from the `tests/unit` directory
+-  Ensure you are running functional tests from the `tests/func` directory
+    -use the `test_print_fires.sh` script to run these
