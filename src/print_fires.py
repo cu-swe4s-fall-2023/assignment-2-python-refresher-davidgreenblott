@@ -45,10 +45,14 @@ def get_user_args():
 def main():
 
     args = get_user_args()
-    fires = my_utils.get_column('../data/'+args.file_name, args.country_column,
+    fires = my_utils.get_column(args.file_name, args.country_column,
                                 args.country, result_column=args.fires_column)
 
-    if args.operation == 'mean':
+    if len(fires) == 0:
+
+        print('No fires found for query')
+
+    elif args.operation == 'mean':
 
         print(f'Mean Fires in {args.country} is: '
               f'{my_utils.get_mean(fires):.3f}')
@@ -57,7 +61,7 @@ def main():
 
         print(f'Median Fires in {args.country} is: '
               f'{my_utils.get_median(fires):.3f}')
-    elif args.operation == 'standard deviation':
+    elif args.operation == 'standard deviation' and len(fires) > 1:
 
         print(f'Standard deviation of fires in {args.country} is: '
               f'{my_utils.get_standard_deviation(fires):.3f}')
