@@ -1,14 +1,21 @@
 name: Tests
 on:
     push:
-        branches: [ main ]
+        branches: [ master ]
     pull_request:
-        branches: [ main ]
+        branches: [ master ]
 jobs: 
     run_unit_tests:
         runs-on: ubuntu-latest
+        defaults:
+            run:
+                shell: bash -el {0}
         steps:
             - uses: actions/checkout@v2
+            - uses: conda-incubator/setup-miniconda@v2
+                with:
+                    activate-environment: swe4s
+                    environment-file: environment.yml
             - run: |
                 cd tests/unit
                 python test_my_utils.py
@@ -21,6 +28,15 @@ jobs:
                 bash test_print_fires.sh
     run_style_check:
         runs-on: ubuntu-latest
+        defaults:
+            run:
+                shell: bash -el {0}
+        steps:
+            - uses: actions/checkout@v2
+            - uses: conda-incubator/setup-miniconda@v2
+                with:
+                    activate-environment: swe4s
+                    environment-file: environment.yml
         steps:
             - uses: actions/checkout@v2
             - run: pycodestyle $(git ls-files "*.py")
