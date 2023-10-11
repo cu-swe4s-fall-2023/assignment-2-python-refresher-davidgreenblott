@@ -1,42 +1,59 @@
 name: Tests
+
 on:
-    push:
-        branches: [ master ]
-    pull_request:
-        branches: [ master ]
-jobs: 
-    run_unit_tests:
-        runs-on: ubuntu-latest
-        defaults:
-            run:
-                shell: bash -el {0}
-        steps:
-            - uses: actions/checkout@v2
-            - uses: conda-incubator/setup-miniconda@v2
-                with:
-                    activate-environment: swe4s
-                    environment-file: environment.yml
-            - run: |
-                cd tests/unit
-                python test_my_utils.py
-    run_func_tests:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - run: |
-                cd tests/func
-                bash test_print_fires.sh
-    run_style_check:
-        runs-on: ubuntu-latest
-        defaults:
-            run:
-                shell: bash -el {0}
-        steps:
-            - uses: actions/checkout@v2
-            - uses: conda-incubator/setup-miniconda@v2
-                with:
-                    activate-environment: swe4s
-                    environment-file: environment.yml
-        steps:
-            - uses: actions/checkout@v2
-            - run: pycodestyle $(git ls-files "*.py")
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  run_unit_tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Conda environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: swe4s
+          environment-file: workflows/environment.yml
+
+      - name: Run unit tests
+        run: |
+          cd tests/unit
+          python test_my_utils.py
+
+  run_func_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run functional tests
+        run: |
+          cd tests/func
+          bash test_print_fires.sh
+
+  run_style_check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Conda environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: swe4s
+          environment-file: workflows/environment.yml
+
+      - name: Run style check
+        run: pycodestyle $(git ls-files "*.py")
