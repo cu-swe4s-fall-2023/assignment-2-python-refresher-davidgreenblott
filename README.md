@@ -19,3 +19,7 @@ a. options include setting the operation parameter to `mean`, `median`, or `stan
 - Ensure you are running unit tests from the `tests/unit` directory
 -  Ensure you are running functional tests from the `tests/func` directory
     -use the `test_print_fires.sh` script to run these
+    
+# Continuous Integration
+- Github workflows will run unit and functional tests upon push/pulls to
+a remote repo
