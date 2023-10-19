@@ -1,0 +1,67 @@
+COUNTRY = 'Albania'
+INDEPENDENT_VARS = ['"IPPU"', '"Forestland"', '"total_emission"']
+
+DEPENDENT_VAR='Forest fires'
+
+def remove_space(INDEPENDENT_VARS):
+    string = [s.replace(" ", "_") for s in INDEPENDENT_VARS]
+    string = [s.replace("\"", "") for s in INDEPENDENT_VARS]
+    return string
+def get_png_names():
+    
+    return [f'../docs/{DEPENDENT_VAR}_vs_{var}.png' for var in remove_space(INDEPENDENT_VARS)]   
+rule all:
+    input:
+      get_png_names()
+
+     
+rule extract_data:
+    input:
+        '../data/Agrofood_co2_emission.csv'
+    output:
+       "../docs/i_vars.csv"
+    shell:
+        """for var in {INDEPENDENT_VARS}; do
+               var_name="$var"
+               python analyze_co2.py --country {COUNTRY} \
+                                     --country_column 0 \
+                                     --result_column "$var_name" \
+                                     --file_name {input} \
+                                     --save_file_name "../docs/i_vars.csv";
+           done
+           """
+
+rule extract_dependent_data:
+    input:
+        '../data/Agrofood_co2_emission.csv'
+    output:
+       "../docs/d_vars.csv"
+    shell:
+           """python analyze_co2.py --country {COUNTRY} \
+                                 --country_column 0 \
+                                 --result_column "{DEPENDENT_VAR}" \
+                                 --file_name {input} \
+                                 --save_file_name "../docs/d_vars.csv";
+           """
+rule generate_scatter_plots:
+    input:
+        data_file_x="../docs/i_vars.csv",
+        data_file_y="../docs/d_vars.csv"
+    output:
+       get_png_names()
+    params:
+        variables = INDEPENDENT_VARS
+    shell:
+        """
+        variable_str="{params.variables}"
+        python scatter.py --data_file_x {input.data_file_x}\
+                             --data_file_y {input.data_file_y} \
+                             --y_label "{DEPENDENT_VAR}" \
+                             --x_labels "$variable_str"
+        """
+        
+rule download_data:
+    output:
+        '../data/Agrofood_co2_emission.csv'
+    shell:
+        'wget "https://docs.google.com/uc?export=download&id=1Wytf3ryf9EtOwaloms8HEzLG0yjtRqxr"'
