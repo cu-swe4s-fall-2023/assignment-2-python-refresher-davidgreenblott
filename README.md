@@ -25,8 +25,7 @@ a. options include setting the operation parameter to `mean`, `median`, or `stan
 
 # Science Presentation
 ## Introduction
-It was examined whether there was a correlation between forest fires and Industrial Processes and Product Use (IPPU),
-Forestland, and total emissions for Albania
+It was examined whether there was a correlation between forest fires and Industrial Processes and Product Use (IPPU), Forestland, and total emissions for Albania
 
 ## Methods
 Data was extracted from the Agrofood_co2_emission.csv for each of the four fields. The forest fire data was plotted against each of the three other fields to examine
