@@ -14,7 +14,13 @@ class TestMyUtils(unittest.TestCase):
         random.seed(42)
         self.array = [random.randint(0, 100) for _ in range(100)]
         self.path_to_data = '../test_data/'
+        
+    def test_get_column_from_name_Equality(self):
 
+        file_name = self.path_to_data + 'Agro_co2_emission_test.csv'
+        idx_actual = my_utils.get_column_from_name(file_name=file_name,
+                                           column_name='Savanna fires')
+        self.assertEqual(idx_actual, 2)
     def test_get_columns_checkEquality(self):
 
         afghan_fires_list_pred = [0, 0, 0, 0]

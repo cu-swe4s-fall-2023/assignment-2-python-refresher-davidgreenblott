@@ -1,0 +1,28 @@
+COUNTRY = 'Afghanistan'
+INDEPENDENT_VARS = ["IPPU", "Forestland", "total_emission"]
+
+rule all:
+    input:
+        expand('{var}.csv', var=INDEPENDENT_VARS)
+
+rule download_data:
+    output:
+        '../data/Agrofood_co2_emission.csv'
+    shell:
+        'wget "https://docs.google.com/uc?export=download&id=1Wytf3ryf9EtOwaloms8HEzLG0yjtRqxr"'
+        
+rule extract_columns:
+    input:
+        '../data/Agrofood_co2_emission.csv'
+    output:
+        expand('{var}.csv', var=INDEPENDENT_VARS)
+    shell:
+        '''for var in {INDEPENDENT_VARS}; do
+               python analyze_co2.py --country {COUNTRY} \
+                                     --country_column 0 \
+                                     --result_column $var \
+                                     --file_name {input} \
+                                     --save_file_name $var\.csv;
+           done'''
+
+        

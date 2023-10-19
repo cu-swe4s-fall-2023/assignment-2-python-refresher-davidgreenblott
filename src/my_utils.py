@@ -4,6 +4,44 @@ in a column that match a query_value'''
 import sys
 import os
 
+def get_column_from_name(file_name='', column_name = ''):
+    '''Returns the index of the column corresponding to the passed in column name
+    Parameters
+    ----------
+
+    file_name: string
+               file path and name of file to access
+    column_name: str
+                 column search for
+    Returns
+    -------
+    
+    column_index: int
+                  column index from file
+    '''
+    try:
+        with open(file_name, 'r') as f:
+
+            header = f.readline()
+            items = header.strip().split(',')
+        
+    except FileNotFoundError:
+        print('Could not find ' + file_name)
+        sys.exit(1)
+    except PermissionError:
+        print('Could not open ' + file_name)
+        sys.exit(1)
+    except TypeError:
+        print('Error in converting query column to an integer')
+        sys.exit(1)
+    
+    try:
+
+        return items.index(column_name)
+    except ValueError:
+        print(f'Value Error: {column_name} not found')
+        sys.exit(1)
+
 
 def get_column(file_name='', query_column=0, query_value='', result_column=3):
     '''Returns a list of values from the query inputs

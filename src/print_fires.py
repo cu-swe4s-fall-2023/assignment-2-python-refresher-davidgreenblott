@@ -26,9 +26,9 @@ def get_user_args():
                         type=int,
                         help='The index of the column containing countries',
                         required=True)
-    parser.add_argument('--fires_column',
+    parser.add_argument('--result_column',
                         type=int,
-                        help='The index of the column containing fire data',
+                        help='The index of the column containing data of interest',
                         required=True)
     parser.add_argument('--file_name',
                         type=str,
@@ -46,11 +46,15 @@ def main():
 
     args = get_user_args()
     fires = my_utils.get_column(args.file_name, args.country_column,
-                                args.country, result_column=args.fires_column)
+                                args.country, result_column=args.result_column)
 
     if len(fires) == 0:
 
         print('No fires found for query')
+        
+    elif args.operation == 'list':
+        
+        print(fires)
 
     elif args.operation == 'mean':
 
