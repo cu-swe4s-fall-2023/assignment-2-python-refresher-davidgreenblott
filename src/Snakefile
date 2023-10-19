@@ -1,28 +1,67 @@
-COUNTRY = 'Afghanistan'
-INDEPENDENT_VARS = ["IPPU", "Forestland", "total_emission"]
+COUNTRY = 'Albania'
+INDEPENDENT_VARS = ['"IPPU"', '"Forestland"', '"total_emission"']
 
+DEPENDENT_VAR='Forest fires'
+
+def remove_space(INDEPENDENT_VARS):
+    string = [s.replace(" ", "_") for s in INDEPENDENT_VARS]
+    string = [s.replace("\"", "") for s in INDEPENDENT_VARS]
+    return string
+def get_png_names():
+    
+    return [f'{DEPENDENT_VAR}_vs_{var}.png' for var in remove_space(INDEPENDENT_VARS)]   
 rule all:
     input:
-        expand('{var}.csv', var=INDEPENDENT_VARS)
+      get_png_names()
 
+     
+rule extract_data:
+    input:
+        '../data/Agrofood_co2_emission.csv'
+    output:
+       "i_vars.csv"
+    shell:
+        """for var in {INDEPENDENT_VARS}; do
+               var_name="$var"
+               python analyze_co2.py --country {COUNTRY} \
+                                     --country_column 0 \
+                                     --result_column "$var_name" \
+                                     --file_name {input} \
+                                     --save_file_name "i_vars.csv";
+           done
+           """
+
+rule extract_dependent_data:
+    input:
+        '../data/Agrofood_co2_emission.csv'
+    output:
+       "d_vars.csv"
+    shell:
+           """python analyze_co2.py --country {COUNTRY} \
+                                 --country_column 0 \
+                                 --result_column "{DEPENDENT_VAR}" \
+                                 --file_name {input} \
+                                 --save_file_name "d_vars.csv";
+           """
+rule generate_scatter_plots:
+    input:
+        data_file_x="i_vars.csv",
+        data_file_y="d_vars.csv"
+    output:
+       get_png_names()
+    params:
+        variables = INDEPENDENT_VARS
+    shell:
+        """
+        variable_str="{params.variables}"
+        python scatter.py --data_file_x {input.data_file_x}\
+                             --data_file_y {input.data_file_y} \
+                             --y_label "{DEPENDENT_VAR}" \
+                             --x_labels "$variable_str"
+        """
+        
 rule download_data:
     output:
         '../data/Agrofood_co2_emission.csv'
     shell:
         'wget "https://docs.google.com/uc?export=download&id=1Wytf3ryf9EtOwaloms8HEzLG0yjtRqxr"'
-        
-rule extract_columns:
-    input:
-        '../data/Agrofood_co2_emission.csv'
-    output:
-        expand('{var}.csv', var=INDEPENDENT_VARS)
-    shell:
-        '''for var in {INDEPENDENT_VARS}; do
-               python analyze_co2.py --country {COUNTRY} \
-                                     --country_column 0 \
-                                     --result_column $var \
-                                     --file_name {input} \
-                                     --save_file_name $var\.csv;
-           done'''
-
-        

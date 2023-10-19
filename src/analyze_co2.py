@@ -51,11 +51,11 @@ def main():
 
     if len(data) == 0:
 
-        print('No fires found for query')
+        print('No data found for query')
         
     else:
 
-        with open(args.save_file_name, 'w', newline='') as file:
+        with open(args.save_file_name, 'a+', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(data)
 if __name__ == "__main__":
