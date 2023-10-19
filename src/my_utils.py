@@ -4,8 +4,9 @@ in a column that match a query_value'''
 import sys
 import os
 
-def get_column_from_name(file_name='', column_name = ''):
-    '''Returns the index of the column corresponding to the passed in column name
+
+def get_column_from_name(file_name='', column_name=''):
+    '''Returns index of the column corresponding to the passed in column name
     Parameters
     ----------
 
@@ -15,7 +16,7 @@ def get_column_from_name(file_name='', column_name = ''):
                  column search for
     Returns
     -------
-    
+
     column_index: int
                   column index from file
     '''
@@ -24,7 +25,7 @@ def get_column_from_name(file_name='', column_name = ''):
 
             header = f.readline()
             items = header.strip().split(',')
-        
+
     except FileNotFoundError:
         print('Could not find ' + file_name)
         sys.exit(1)
@@ -34,7 +35,7 @@ def get_column_from_name(file_name='', column_name = ''):
     except TypeError:
         print('Error in converting query column to an integer')
         sys.exit(1)
-    
+
     try:
 
         return items.index(column_name)
