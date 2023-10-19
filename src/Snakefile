@@ -9,7 +9,7 @@ def remove_space(INDEPENDENT_VARS):
     return string
 def get_png_names():
     
-    return [f'{DEPENDENT_VAR}_vs_{var}.png' for var in remove_space(INDEPENDENT_VARS)]   
+    return [f'../docs/{DEPENDENT_VAR}_vs_{var}.png' for var in remove_space(INDEPENDENT_VARS)]   
 rule all:
     input:
       get_png_names()
@@ -19,7 +19,7 @@ rule extract_data:
     input:
         '../data/Agrofood_co2_emission.csv'
     output:
-       "i_vars.csv"
+       "../docs/i_vars.csv"
     shell:
         """for var in {INDEPENDENT_VARS}; do
                var_name="$var"
@@ -27,7 +27,7 @@ rule extract_data:
                                      --country_column 0 \
                                      --result_column "$var_name" \
                                      --file_name {input} \
-                                     --save_file_name "i_vars.csv";
+                                     --save_file_name "../docs/i_vars.csv";
            done
            """
 
@@ -35,18 +35,18 @@ rule extract_dependent_data:
     input:
         '../data/Agrofood_co2_emission.csv'
     output:
-       "d_vars.csv"
+       "../docs/d_vars.csv"
     shell:
            """python analyze_co2.py --country {COUNTRY} \
                                  --country_column 0 \
                                  --result_column "{DEPENDENT_VAR}" \
                                  --file_name {input} \
-                                 --save_file_name "d_vars.csv";
+                                 --save_file_name "../docs/d_vars.csv";
            """
 rule generate_scatter_plots:
     input:
-        data_file_x="i_vars.csv",
-        data_file_y="d_vars.csv"
+        data_file_x="../docs/i_vars.csv",
+        data_file_y="../docs/d_vars.csv"
     output:
        get_png_names()
     params:

@@ -81,7 +81,7 @@ def main():
         ax.set_ylabel(y_label)
         ax.set_title(f'{y_label}_vs_{x_label}')
 
-        plt.savefig(f'{y_label}_vs_{x_label}.png',bbox_inches='tight')
+        plt.savefig(f'../docs/{y_label}_vs_{x_label}.png',bbox_inches='tight')
 
 if __name__ == "__main__":
     main()

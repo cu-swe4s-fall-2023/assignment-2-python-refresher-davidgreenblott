@@ -56,7 +56,7 @@ def main():
     else:
 
         with open(args.save_file_name, 'a+', newline='') as file:
-            writer = csv.writer(file)
+            writer = csv.writer('../docs/'+file)
             writer.writerow(data)
 if __name__ == "__main__":
     main()
