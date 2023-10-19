@@ -1,9 +1,8 @@
-#todo
-
 import my_utils
 import argparse
 import os
 import csv
+
 
 def get_user_args():
     """Accepts user input from command line
@@ -26,7 +25,7 @@ def get_user_args():
                         required=True)
     parser.add_argument('--result_column',
                         type=str,
-                        help='The name of the column containing data of interest',
+                        help='Column containing data of interest',
                         required=True)
     parser.add_argument('--file_name',
                         type=str,
@@ -40,23 +39,25 @@ def get_user_args():
 
 
 def main():
-    
+
     args = get_user_args()
 
-    column_index = my_utils.get_column_from_name(file_name = args.file_name,
-                                                 column_name = args.result_column)
-                                                 
+    col_index = my_utils.get_column_from_name(file_name=args.file_name,
+                                              column_name=args.result_column)
+
     data = my_utils.get_column(args.file_name, args.country_column,
-                                args.country, result_column=column_index)
+                               args.country, result_column=col_index)
 
     if len(data) == 0:
 
         print('No data found for query')
-        
+
     else:
 
         with open(args.save_file_name, 'a+', newline='') as file:
             writer = csv.writer('../docs/'+file)
             writer.writerow(data)
+
+
 if __name__ == "__main__":
     main()

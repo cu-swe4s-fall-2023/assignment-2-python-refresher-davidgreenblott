@@ -1,9 +1,10 @@
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
+matplotlib.use('Agg')  # noqa
 import matplotlib.pyplot as plt
 import argparse
 import csv
+
 
 def get_user_args():
     """Accepts user input from command line
@@ -34,13 +35,14 @@ def get_user_args():
                         required=True)
     return parser.parse_args()
 
+
 def get_file_data(file_name):
-    
+
     try:
         with open(file_name, 'r') as f:
-            
+
             return f.readlines()
-        
+
     except FileNotFoundError:
         print('Could not find ' + file_name)
         sys.exit(1)
@@ -51,11 +53,12 @@ def get_file_data(file_name):
         print('Error in converting query column to an integer')
         sys.exit(1)
 
+
 def main():
-    
+
     args = get_user_args()
     x_labels = args.x_labels.split()
-    y_label = args.y_label   
+    y_label = args.y_label
 
     y = get_file_data(args.data_file_y)
 
@@ -66,22 +69,22 @@ def main():
 
     for idx, line in enumerate(x):
 
-        
         x_values = line.strip()
         x_values = [int(val) for val in x_values.split(',')]
 
-        x_label = x_labels[idx]    
+        x_label = x_labels[idx]
 
         fig, ax = plt.subplots()
         ax.xaxis.set_major_locator(plt.MaxNLocator(3))
-        ax.scatter(x_values,y_values)
+        ax.scatter(x_values, y_values)
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         ax.set_xlabel(x_label)
         ax.set_ylabel(y_label)
         ax.set_title(f'{y_label}_vs_{x_label}')
 
-        plt.savefig(f'../docs/{y_label}_vs_{x_label}.png',bbox_inches='tight')
+        plt.savefig(f'../docs/{y_label}_vs_{x_label}.png', bbox_inches='tight')
+
 
 if __name__ == "__main__":
     main()

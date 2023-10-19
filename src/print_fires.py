@@ -28,7 +28,7 @@ def get_user_args():
                         required=True)
     parser.add_argument('--result_column',
                         type=int,
-                        help='The index of the column containing data of interest',
+                        help='The index of the col containing data',
                         required=True)
     parser.add_argument('--file_name',
                         type=str,
@@ -51,9 +51,9 @@ def main():
     if len(fires) == 0:
 
         print('No fires found for query')
-        
+
     elif args.operation == 'list':
-        
+
         print(fires)
 
     elif args.operation == 'mean':

@@ -21,5 +21,19 @@ a. options include setting the operation parameter to `mean`, `median`, or `stan
     -use the `test_print_fires.sh` script to run these
     
 # Continuous Integration
-- Github workflows will run unit and functional tests upon push/pulls to
-a remote repo
+- Github workflows will run unit and functional tests upon push/pulls to a remote repo
+
+# Science Presentation
+## Introduction
+It was examined whether there was a correlation between forest fires and Industrial Processes and Product Use (IPPU),
+Forestland, and total emissions for Albania
+
+## Methods
+Data was extracted from the Agrofood_co2_emission.csv for each of the four fields. The forest fire data was plotted against each of the three other fields to examine
+correlations.
+
+## Results
+1. There was a positive correlation between Forest Fires and Forestland
+- this seems to be against logic
+2. There was a negative correlation between Forest Fires and IPPU
+3. There didn't eem to be too much of a correlation between Forest Firest and total emissions
