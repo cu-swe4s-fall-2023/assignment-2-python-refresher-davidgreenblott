@@ -9,7 +9,7 @@ file_name="$data_path"'Agro_co2_emission_test.csv'
 
 run basic_mean python ../../src/print_fires.py \
                     --country "$country" --country_column $country_column \
-                    --results_column $fires_column --file_name $file_name \
+                    --result_column $fires_column --file_name $file_name \
                     --operation 'mean'
                     
 assert_in_stdout 0
@@ -17,7 +17,7 @@ assert_exit_code 0
 
 run basic_median python ../../src/print_fires.py \
                     --country "$country" --country_column $country_column \
-                    --results_column $fires_column --file_name $file_name \
+                    --result_column $fires_column --file_name $file_name \
                     --operation 'median'
                     
 assert_in_stdout 0
@@ -25,18 +25,18 @@ assert_exit_code 0
 
 run basic_stdev python ../../src/print_fires.py \
                     --country "$country" --country_column $country_column \
-                    --results_column $fires_column --file_name $file_name \
+                    --result_column $fires_column --file_name $file_name \
                     --operation 'standard deviation'
                     
 assert_in_stdout 0
 assert_exit_code 0
 python ../../src/print_fires.py \
                     --country "$country" --country_column $country_column \
-                    --results_column $fires_column --file_name $file_name \
+                    --result_column $fires_column --file_name $file_name \
                     --operation 'standard deviation'
 run fileNotFound python ../../src/print_fires.py \
                     --country "$country" --country_column $country_column \
-                    --results_column $fires_column --file_name bubba.csv \
+                    --result_column $fires_column --file_name bubba.csv \
                     --operation 'mean'
                     
 assert_exit_code 1
