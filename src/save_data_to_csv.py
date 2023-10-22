@@ -11,7 +11,7 @@ def get_user_args():
     Returns
     -------
     parser
-    arg parser with country, country_column, fires_column, and file_name fields
+    arg parser with country, country_column, result_column, file_name, and save_file_name fields
     """
     parser = argparse.ArgumentParser(
                 description='Add parameters for query search')
@@ -41,10 +41,8 @@ def get_user_args():
 def main():
 
     args = get_user_args()
-
     col_index = my_utils.get_column_from_name(file_name=args.file_name,
                                               column_name=args.result_column)
-
     data = my_utils.get_column(args.file_name, args.country_column,
                                args.country, result_column=col_index)
 

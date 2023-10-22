@@ -13,7 +13,7 @@ def get_user_args():
     Returns
     -------
     parser
-    arg parser with country, country_column, fires_column, and file_name fields
+    arg parser with data_file_x, data_file_y, y_label, and x_label
     """
     parser = argparse.ArgumentParser(
                 description='Add parameters for query search')
@@ -37,11 +37,20 @@ def get_user_args():
 
 
 def get_file_data(file_name):
-
+     """Open data file csv and return the lines
+    Parameters
+    ----------
+    file_name: string
+               name of csv file to read in
+    Returns
+    -------
+    lines: str
+           string of all values in csv file
+    """
     try:
         with open(file_name, 'r') as f:
-
-            return f.readlines()
+            lines = f.readlines()
+            return lines
 
     except FileNotFoundError:
         print('Could not find ' + file_name)
@@ -49,10 +58,6 @@ def get_file_data(file_name):
     except PermissionError:
         print('Could not open ' + file_name)
         sys.exit(1)
-    except TypeError:
-        print('Error in converting query column to an integer')
-        sys.exit(1)
-
 
 def main():
 
@@ -61,7 +66,6 @@ def main():
     y_label = args.y_label
 
     y = get_file_data(args.data_file_y)
-
     x = get_file_data(args.data_file_x)
 
     y_values = next(iter(y)).strip()
