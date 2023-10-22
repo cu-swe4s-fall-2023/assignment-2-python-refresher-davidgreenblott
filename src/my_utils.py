@@ -1,6 +1,3 @@
-'''takes in a file name and returns values
-in a column that match a query_value'''
-
 import sys
 import os
 
@@ -9,14 +6,12 @@ def get_column_from_name(file_name='', column_name=''):
     '''Returns index of the column corresponding to the passed in column name
     Parameters
     ----------
-
     file_name: string
                file path and name of file to access
     column_name: str
                  column search for
     Returns
     -------
-
     column_index: int
                   column index from file
     '''
@@ -57,6 +52,8 @@ def get_column(file_name='', query_column=0, query_value='', result_column=3):
                  which country to perform search on
     result_column: int
                   the column that has value of interest
+                  default = 3 for the fires column in the
+                  agro food
     '''
     matchingValues = []
 
