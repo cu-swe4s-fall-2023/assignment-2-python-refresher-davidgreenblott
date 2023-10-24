@@ -68,6 +68,17 @@ class TestMyUtils(unittest.TestCase):
         stdev_pred = my_utils.get_standard_deviation(self.array)
         self.assertNotEqual(-1, stdev_pred)
 
+    def test_get_column_from_name(self):
+
+        file_name = self.path_to_data + 'Agro_co2_emission_test.csv'
+
+        self.assertEqual(my_utils.get_column_from_name(file_name=file_name,
+                                                       column_name='Year'), 1)
+        self.assertNotEqual(
+            my_utils.get_column_from_name(file_name=file_name,
+                                          column_name='Year'), 0
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
