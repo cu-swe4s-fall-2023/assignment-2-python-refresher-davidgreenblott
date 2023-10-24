@@ -60,6 +60,7 @@ def get_file_data(file_name):
         print('Could not open ' + file_name)
         sys.exit(1)
 
+
 def main():
 
     args = get_user_args()
