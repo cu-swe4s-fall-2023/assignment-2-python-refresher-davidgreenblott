@@ -11,7 +11,8 @@ def get_user_args():
     Returns
     -------
     parser
-    arg parser with country, country_column, result_column, file_name, and save_file_name fields
+    arg parser with country, country_column, result_column,
+    file_name, and save_file_name fields
     """
     parser = argparse.ArgumentParser(
                 description='Add parameters for query search')
