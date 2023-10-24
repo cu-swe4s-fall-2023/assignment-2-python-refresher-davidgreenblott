@@ -4,6 +4,7 @@ matplotlib.use('Agg')  # noqa
 import matplotlib.pyplot as plt
 import argparse
 import csv
+import sys
 
 
 def get_user_args():
@@ -37,7 +38,7 @@ def get_user_args():
 
 
 def get_file_data(file_name):
-     """Open data file csv and return the lines
+    """Open data file csv and return the lines
     Parameters
     ----------
     file_name: string
